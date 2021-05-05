@@ -7,7 +7,11 @@ close all
 clc
 
 %Load the file
+<<<<<<< HEAD
 fname = '2021-05-05-15-54-43.bag';       % Filename
+=======
+fname = '2021-05-04-20-42-13.bag';       % Filename
+>>>>>>> 8c602bb3de0ecc093bbdb8e2823202591f8e9d42
 %Create a bag file object with the file name
 bag = rosbag(fname)
 %Display a list of the topics and message types in the bag file
@@ -15,10 +19,16 @@ bag.AvailableTopics
 
 %Create time series for the Odometry & Command data
 %Retrieve the messages as a cell array
+<<<<<<< HEAD
 debug_vel_msgs = select(bag,'Topic','/cora/control/vel_pid_debug');
 debug_yaw_msgs = select(bag,'Topic','/cora/control/yaw_pid_debug');
 cmd_msgs = select(bag,'Topic','/cora/cmd_vel');
 odom_msgs = select(bag,'Topic','/cora/sensors/p3d');
+=======
+odom_vel_msgs = select(bag,'Topic','/cora/control/vel_pid_debug');
+odom_yaw_msgs = select(bag,'Topic','/cora/control/yaw_pid_debug');
+cmd_msgs = select(bag,'Topic','/cora/cmd_vel');
+>>>>>>> 8c602bb3de0ecc093bbdb8e2823202591f8e9d42
 %Create a timeseries object of the subset of message fields we are interested in
 odom_ts = timeseries(odom_msgs,'Pose.Pose.Position.X','Pose.Pose.Position.Y', ...
     'Pose.Pose.Orientation.W','Pose.Pose.Orientation.X','Pose.Pose.Orientation.Y','Pose.Pose.Orientation.Z', ...
@@ -70,8 +80,12 @@ q = odom_ts.Data(:,3:6);
 e = quat2eul(q);
 yaw = e(:,1);
 yaw_d = rad2deg(yaw);
+<<<<<<< HEAD
 
 %Plot Yaw vs. Time
+=======
+Plot Yaw vs. Time
+>>>>>>> 8c602bb3de0ecc093bbdb8e2823202591f8e9d42
 
 figure(4); clf();
 plot(odom_ts.Time-odom_ts.Time(1),yaw_d)
